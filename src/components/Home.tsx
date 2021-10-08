@@ -68,15 +68,6 @@ const Home = () => {
       createdAt: Date.now(),
       isLiked: false,
     });
-    // const newTweet = {
-    //   text: tweet,
-    //   isLiked: false,
-    // };
-    // const newTweetArray = [...tweets, newTweet];
-
-    // setTweets(newTweetArray);
-    // console.log(newTweetArray);
-    // console.log(tweets);
 
     setTweet("");
   };
