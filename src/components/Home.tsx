@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Tweet from "./Tweet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDove } from "@fortawesome/free-solid-svg-icons";
+import { addDoc, collection, onSnapshot, query } from "@firebase/firestore";
+import { db } from "../firebase";
 
 const Container = styled.div`
   display: flex;
@@ -36,24 +38,45 @@ const SubmitBtn = styled.button`
   width: 30px;
   height: 30px;
 `;
-
+type tweetObj = {
+  text: String;
+  createdAt: String;
+  isLiked: Boolean;
+  id: string;
+};
 const Home = () => {
   const [tweet, setTweet] = useState("");
-  const [tweets, setTweets] = useState<{ text: String; isLiked: Boolean }[]>(
-    []
-  );
-  useEffect(() => {}, []);
-  const onSubmit = (event: any) => {
-    event?.preventDefault();
-    const newTweet = {
-      text: tweet,
-      isLiked: false,
-    };
-    const newTweetArray = [...tweets, newTweet];
+  const [tweets, setTweets] = useState<tweetObj[]>([]); // eslint-disable-line no-unused-vars
 
-    setTweets(newTweetArray);
-    console.log(newTweetArray);
-    console.log(tweets);
+  useEffect(() => {
+    const q = query(collection(db, "tweets"));
+    onSnapshot(q, (querySnapshot) => {
+      const newTweets = querySnapshot.docs.map((doc) => ({
+        text: doc.data().text,
+        createdAt: doc.data().createdAt,
+        isLiked: doc.data().isLiked,
+        id: doc.id,
+      }));
+      setTweets(newTweets);
+      console.log(newTweets);
+    });
+  }, []);
+  const onSubmit = async (event: any) => {
+    event?.preventDefault();
+    await addDoc(collection(db, "tweets"), {
+      text: tweet,
+      createdAt: Date.now(),
+      isLiked: false,
+    });
+    // const newTweet = {
+    //   text: tweet,
+    //   isLiked: false,
+    // };
+    // const newTweetArray = [...tweets, newTweet];
+
+    // setTweets(newTweetArray);
+    // console.log(newTweetArray);
+    // console.log(tweets);
 
     setTweet("");
   };

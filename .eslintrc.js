@@ -2,9 +2,10 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
   },
   extends: [
-    "eslint:recommended",
+    // "eslint:recommended",
     "plugin:react/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
