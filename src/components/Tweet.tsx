@@ -6,15 +6,6 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { deleteDoc, doc, setDoc } from "@firebase/firestore";
 import { db } from "../firebase";
 
-type PartialContext = {
-  tweetObj: {
-    text: String;
-    isLiked: Boolean;
-    createdAt: String;
-    id: string;
-  };
-};
-
 const TweetContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -34,6 +25,18 @@ const DeleteBtn = styled.span`
   margin-top: 5px;
   color: #b9b9b9;
 `;
+
+type PartialContext = {
+  tweetObj: {
+    text: String;
+    isLiked: Boolean;
+    createdAt: String;
+    id: string;
+    creatorId: string;
+    creatorName: string;
+  };
+};
+
 const Tweet = ({ tweetObj }: PartialContext) => {
   const toggleLike = async () => {
     await setDoc(
@@ -55,7 +58,7 @@ const Tweet = ({ tweetObj }: PartialContext) => {
   return (
     <TweetContainer>
       <TextContainer>
-        {tweetObj.text}
+        {tweetObj.text} by {tweetObj.creatorName}
         <DeleteBtn onClick={onDeleteClick}>Delete this tweet</DeleteBtn>
       </TextContainer>
       <LikeContainer onClick={toggleLike}>

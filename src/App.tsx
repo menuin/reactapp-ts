@@ -4,12 +4,14 @@ import type { User } from "firebase/auth";
 import LogoutButton from "./components/LogoutButton";
 import LoginButton from "./components/LoginButton";
 
+type UserStateType = {
+  token: string | null;
+  user: User | null;
+  isLoggedIn: boolean;
+};
+
 const App = () => {
-  const [state, setState] = useState<{
-    token: string | null;
-    user: User | null;
-    isLoggedIn: boolean;
-  }>({
+  const [state, setState] = useState<UserStateType>({
     token: JSON.parse(localStorage.getItem("token") ?? "{}") ?? null,
     user: JSON.parse(localStorage.getItem("user") ?? "{}") ?? null,
     isLoggedIn: false,
@@ -28,9 +30,9 @@ const App = () => {
   };
   return (
     <div style={{ width: "800px", margin: "auto" }} className="App">
-      {state.isLoggedIn ? (
+      {state.user ? (
         <div>
-          <Home />
+          <Home userState={state} />
           <LogoutButton onLogout={() => setAuth({ token: null, user: null })} />
         </div>
       ) : (
