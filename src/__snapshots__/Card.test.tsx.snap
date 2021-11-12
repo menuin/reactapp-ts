@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+<div>
+  <div>
+    number:
+    1234123412341234
+    cvc:
+    012
+    date:
+    08/24
+  </div>
+</div>
+`;

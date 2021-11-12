@@ -68,7 +68,6 @@ const Home = () => {
       createdAt: Date.now(),
       isLiked: false,
     });
-
     setTweet("");
   };
   const onChange = (event: any) => {
