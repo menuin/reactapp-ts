@@ -5,6 +5,7 @@ import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { deleteDoc, doc, setDoc } from "@firebase/firestore";
 import { db } from "../firebase";
+import "regenerator-runtime";
 
 const TweetContainer = styled.div`
   display: flex;
@@ -21,11 +22,14 @@ const TextContainer = styled.div`
   flex-direction: column;
 `;
 const DeleteBtn = styled.span`
+  float: none;
   font-size: 10px;
   margin-top: 5px;
   color: #b9b9b9;
 `;
-
+const UsernameContainer = styled.div`
+  font-size: 10px;
+`;
 type PartialContext = {
   tweetObj: {
     text: String;
@@ -58,7 +62,8 @@ const Tweet = ({ tweetObj }: PartialContext) => {
   return (
     <TweetContainer>
       <TextContainer>
-        {tweetObj.text} by {tweetObj.creatorName}
+        {tweetObj.text}
+        <UsernameContainer>by {tweetObj.creatorName}</UsernameContainer>
         <DeleteBtn onClick={onDeleteClick}>Delete this tweet</DeleteBtn>
       </TextContainer>
       <LikeContainer onClick={toggleLike}>
