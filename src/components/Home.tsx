@@ -24,9 +24,9 @@ type UserStateType = {
   isLoggedIn: boolean;
 };
 type TweetObj = {
-  text: String;
-  isLiked: Boolean;
-  createdAt: String;
+  text: string;
+  isLiked: boolean;
+  createdAt: string;
   id: string;
   creatorId: string;
   creatorName: string;
