@@ -5,7 +5,6 @@ import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { deleteDoc, doc, setDoc } from "@firebase/firestore";
 import { db } from "../firebase";
-import "regenerator-runtime";
 
 const TweetContainer = styled.div`
   display: flex;
@@ -16,25 +15,30 @@ const TweetContainer = styled.div`
   margin-bottom: 20px;
   border-radius: 5px;
 `;
+
 const LikeContainer = styled.div``;
+
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const DeleteBtn = styled.span`
   float: none;
   font-size: 10px;
   margin-top: 5px;
   color: #b9b9b9;
 `;
+
 const UsernameContainer = styled.div`
   font-size: 10px;
 `;
+
 type PartialContext = {
   tweetObj: {
-    text: String;
-    isLiked: Boolean;
-    createdAt: String;
+    text: string;
+    isLiked: boolean;
+    createdAt: string;
     id: string;
     creatorId: string;
     creatorName: string;

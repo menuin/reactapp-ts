@@ -4,6 +4,9 @@ import type { User } from "firebase/auth";
 import LogoutButton from "./components/LogoutButton";
 import LoginButton from "./components/LoginButton";
 
+
+// this is new comment
+
 type UserStateType = {
   token: string | null;
   user: User | null;
@@ -28,6 +31,7 @@ const App = () => {
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("user", JSON.stringify(user));
   };
+
   return (
     <div style={{ width: "800px", margin: "auto" }} className="App">
       {state.user ? (
